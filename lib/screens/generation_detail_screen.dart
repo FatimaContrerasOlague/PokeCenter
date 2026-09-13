@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/models/generation_detail_response.dart';
-import 'package:flutter_application_2/providers/poke_api_provider.dart';
-import 'package:flutter_application_2/screens/pokemon_detail_screen.dart';
+import 'package:PokeCenter/models/generation_detail_response.dart';
+import 'package:PokeCenter/providers/poke_api_provider.dart';
+import 'package:PokeCenter/screens/pokemon_detail_screen.dart';
 
 
 class GenerationDetailScreen extends StatelessWidget {

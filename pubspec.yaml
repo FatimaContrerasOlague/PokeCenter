@@ -1,5 +1,5 @@
-name: flutter_application_2
-description: "A new Flutter project."
+name: PokeCenter
+description: "Pokemon Center"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -57,8 +57,12 @@ flutter:
 
   assets:
     - assets/images/poke_center/centerF1.jpeg
+    - assets/images/poke_center/tradeF1.jpeg
+    - assets/images/poke_center/tradeF2.jpeg
     - assets/images/poke_center/characters/nurse1.png
     - assets/images/poke_center/characters/nurse2.png
+    - assets/images/poke_center/characters/chansey.png
+    - assets/images/poke_center/characters/chansey2.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
