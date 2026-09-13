@@ -1,4 +1,7 @@
+import 'package:PokeCenter/screens/healing_machine_screen.dart';
+import 'package:PokeCenter/widgets/menu_button.dart';
 import 'package:flutter/material.dart';
+import 'package:PokeCenter/widgets/responsive_panel.dart';
 import 'package:PokeCenter/screens/pokemon_trade_screen.dart';
 
 class PokemonCenterScreen extends StatelessWidget {
@@ -15,26 +18,20 @@ class PokemonCenterScreen extends StatelessWidget {
       //    child: const Text('Centro Pokemon'),
     //    ),
     //  ),
-    // trade
-      floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.swap_horiz),
-        label: const Text('Intercambiar Pokémon'),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const PokemonTradeScreen(),
-            ),
-          );
-        },
-      ),
-
       body: Stack(
         fit: StackFit.expand,
         children: [
           Image.asset(
             'assets/images/poke_center/centerF1.jpeg',
             fit: BoxFit.cover,
+          ),
+          SafeArea(
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: MenuButton(
+                onPressed: () {},
+              ),
+            ),
           ),
           Positioned(
             left: screenWidth * - 0.10,
@@ -72,6 +69,36 @@ class PokemonCenterScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
+          Positioned(
+  left: 10,
+  right: 10,
+  bottom: screenHeight * 0.12,
+  child: ResponsivePanel(
+    widthFactor: 1,
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          'Hola, bienvenido al Centro Pokémon',
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 50),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HealingMachineScreen(),
+              ),
+            );
+          },
+          child: const Text('Ir a la máquina de curación'),
+        ),
+      ],
+    ),
+  ),
+),
         ],
       ),
     );
