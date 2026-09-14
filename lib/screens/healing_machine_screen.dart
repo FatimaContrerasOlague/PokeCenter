@@ -1,6 +1,7 @@
 import 'package:PokeCenter/widgets/menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:PokeCenter/widgets/responsive_panel.dart';
+import 'package:PokeCenter/screens/pokemon_center_screen.dart';
 
 class HealingMachineScreen extends StatelessWidget {
   const HealingMachineScreen({super.key});
@@ -52,7 +53,7 @@ class HealingMachineScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const HealingMachineScreen(),
+                builder: (context) => const PokemonCenterScreen(),
               ),
             );
           },
