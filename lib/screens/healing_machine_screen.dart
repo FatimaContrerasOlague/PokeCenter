@@ -1,5 +1,6 @@
 import 'package:PokeCenter/widgets/menu_button.dart';
 import 'package:flutter/material.dart';
+import 'package:PokeCenter/widgets/responsive_panel.dart';
 
 class HealingMachineScreen extends StatelessWidget {
   const HealingMachineScreen({super.key});
@@ -27,9 +28,40 @@ class HealingMachineScreen extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: MenuButton(
                 onPressed: () {},
+                
               ),
             ),
           ),
+            Positioned(
+  left: 10,
+  right: 10,
+  bottom: screenHeight * 0.12,
+  child: ResponsivePanel(
+    widthFactor: 1,
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const Text(
+          'Hola, bienvenido al Centro Pokémon',
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 50),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HealingMachineScreen(),
+              ),
+            );
+          },
+          child: const Text('Ir a la máquina de curación'),
+        ),
+      ],
+    ),
+  ),
+),
         ],
       ),
     );
