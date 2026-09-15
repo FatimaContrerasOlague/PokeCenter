@@ -58,6 +58,7 @@ flutter:
   assets:
     - assets/images/poke_center/
     - assets/images/menu.png
+    - assets/images/poke_center/characters/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -81,11 +82,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   # fonts:
-flutter:
   fonts:
     - family: NESFont
       fonts:
-        - asset: assets\fonts\nintendo_nes_font.ttf
+        - asset: assets/fonts/nintendo_nes_font.ttf
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
