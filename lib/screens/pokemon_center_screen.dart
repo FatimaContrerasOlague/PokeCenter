@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:PokeCenter/widgets/responsive_panel.dart';
 import 'package:PokeCenter/screens/pokemon_trade_screen.dart';
 
+const _panelColor = Color(0xFF5345AB);
+
 class PokemonCenterScreen extends StatelessWidget {
   const PokemonCenterScreen({super.key});
 
@@ -82,9 +84,14 @@ class PokemonCenterScreen extends StatelessWidget {
         const Text(
           'Hola, bienvenido al Centro Pokémon',
           textAlign: TextAlign.center,
+          style: TextStyle(fontFamily: 'NESFont'),
         ),
         const SizedBox(height: 10),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: _panelColor,
+            foregroundColor: Colors.white,
+          ),
           onPressed: () {
             Navigator.push(
               context,
@@ -97,6 +104,10 @@ class PokemonCenterScreen extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: _panelColor,
+            foregroundColor: Colors.white,
+          ),
           onPressed: () {
             Navigator.push(
               context,
