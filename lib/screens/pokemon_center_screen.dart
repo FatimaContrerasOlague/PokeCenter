@@ -72,10 +72,10 @@ class PokemonCenterScreen extends StatelessWidget {
           Positioned(
   left: 10,
   right: 10,
-  bottom: screenHeight * 0.12,
+  bottom: screenHeight * 0.10,
   child: ResponsivePanel(
     widthFactor: 1,
-    padding: const EdgeInsets.all(16),
+    padding: const EdgeInsets.all(10),
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -83,7 +83,7 @@ class PokemonCenterScreen extends StatelessWidget {
           'Hola, bienvenido al Centro Pokémon',
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -94,6 +94,18 @@ class PokemonCenterScreen extends StatelessWidget {
             );
           },
           child: const Text('Ir a la máquina de curación'),
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const PokemonTradeScreen(),
+              ),
+            );
+          },
+          child: const Text('Ir a la máquina de intercambio'),
         ),
       ],
     ),

@@ -44,7 +44,7 @@ class HealingMachineScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          'Hola, bienvenido al Centro Pokémon',
+          '',
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 50),
@@ -57,7 +57,7 @@ class HealingMachineScreen extends StatelessWidget {
               ),
             );
           },
-          child: const Text('Ir a la máquina de curación'),
+          child: const Text('Regresar al Centro Pokemon'),
         ),
       ],
     ),
