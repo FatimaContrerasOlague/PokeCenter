@@ -5,7 +5,9 @@ import 'package:PokeCenter/widgets/responsive_panel.dart';
 const _tradeYellow = Color(0xFFE5D36D);
 
 class PokemonTradeScreen extends StatelessWidget {
-  const PokemonTradeScreen({super.key});
+  final List<int> selectedPokemonIds;
+
+  const PokemonTradeScreen({super.key, this.selectedPokemonIds = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class PokemonTradeScreen extends StatelessWidget {
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
-              child: MenuButton(onPressed: () => Navigator.maybePop(context)),
+              child: const MenuButton(),
             ),
           ),
           Positioned(

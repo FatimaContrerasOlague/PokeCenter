@@ -2,7 +2,7 @@ import 'package:PokeCenter/screens/healing_machine_screen.dart';
 import 'package:PokeCenter/widgets/menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:PokeCenter/widgets/responsive_panel.dart';
-import 'package:PokeCenter/screens/pokemon_trade_screen.dart';
+import 'package:PokeCenter/screens/pokemon_selection_screen.dart';
 
 const _panelColor = Color(0xFF5345AB);
 
@@ -30,9 +30,7 @@ class PokemonCenterScreen extends StatelessWidget {
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
-              child: MenuButton(
-                onPressed: () {},
-              ),
+              child: const MenuButton(),
             ),
           ),
           Positioned(
@@ -114,7 +112,7 @@ class PokemonCenterScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PokemonTradeScreen(),
+                builder: (context) => const PokemonSelectionScreen(),
               ),
             );
           },
