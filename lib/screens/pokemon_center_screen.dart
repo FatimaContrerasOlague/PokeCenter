@@ -82,15 +82,17 @@ class PokemonCenterScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         const Text(
-          'Hola, bienvenido al Centro Pokémon',
+          'HOLA, BIENVENIDO AL CENTRO POKEMON',
           textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'NESFont'),
+          style: TextStyle(fontFamily: 'NESFont',color: Colors.white),
+          
         ),
         const SizedBox(height: 10),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: _panelColor,
             foregroundColor: Colors.white,
+            
           ),
           onPressed: () {
             Navigator.push(
@@ -100,7 +102,7 @@ class PokemonCenterScreen extends StatelessWidget {
               ),
             );
           },
-          child: const Text('Ir a la máquina de curación'),
+          child: const Text('IR A LA MAQUINA DE CURACION', style: TextStyle(fontFamily: 'NESFont',color: Colors.white),),
         ),
         const SizedBox(height: 10),
         ElevatedButton(
@@ -116,7 +118,7 @@ class PokemonCenterScreen extends StatelessWidget {
               ),
             );
           },
-          child: const Text('Ir a la máquina de intercambio'),
+          child: const Text('IR A LA MAQUINA DE INTERCAMBIO', style: TextStyle(fontFamily: 'NESFont',color: Colors.white),),
         ),
       ],
     ),
