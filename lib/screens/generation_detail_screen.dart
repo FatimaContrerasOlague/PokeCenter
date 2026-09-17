@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:PokeCenter/models/generation_detail_response.dart';
-import 'package:PokeCenter/providers/poke_api_provider.dart';
-import 'package:PokeCenter/screens/pokemon_detail_screen.dart';
+import 'package:poke_center/models/generation_detail_response.dart';
+import 'package:poke_center/providers/poke_api_provider.dart';
+import 'package:poke_center/screens/pokemon_detail_screen.dart';
 
 
 class GenerationDetailScreen extends StatelessWidget {
   final int generationId;
 
-  const GenerationDetailScreen({Key? key, required this.generationId}) : super(key: key);
+  const GenerationDetailScreen({super.key, required this.generationId});
 
   String _spriteUrl(int id) =>
       'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png';
@@ -31,7 +31,7 @@ class GenerationDetailScreen extends StatelessWidget {
             return const Center(child: Text('No data available'));
           } else {
             final generationDetailResponse = GenerationDetailResponse.fromRawJson(snapshot.data!.body);
-            final speciesList = generationDetailResponse.PokemonSpecies;
+            final speciesList = generationDetailResponse.pokemonSpecies;
             return GridView.builder(
               padding: const EdgeInsets.all(12),
               itemCount: speciesList.length,

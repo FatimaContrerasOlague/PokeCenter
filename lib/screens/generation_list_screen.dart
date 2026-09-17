@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:PokeCenter/models/generation_list_response.dart';
-import 'package:PokeCenter/screens/generation_detail_screen.dart';
-import 'package:PokeCenter/screens/pokemon_center_screen.dart';
+import 'package:poke_center/models/generation_list_response.dart';
+import 'package:poke_center/screens/generation_detail_screen.dart';
+import 'package:poke_center/screens/pokemon_center_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:PokeCenter/providers/poke_api_provider.dart';
+import 'package:poke_center/providers/poke_api_provider.dart';
 import 'package:http/http.dart' as http;
 
 

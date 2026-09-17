@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class GenerationDetailResponse{
-  final id;
+  final int id;
   final String name;
-  final List<PokemonSpeciesItem> PokemonSpecies;
+  final List<PokemonSpeciesItem> pokemonSpecies;
 
   GenerationDetailResponse({
     required this.id,
     required this.name,
-    required this.PokemonSpecies,
+    required this.pokemonSpecies,
   });
 
   factory GenerationDetailResponse.fromRawJson(String str) => GenerationDetailResponse.fromJson(json.decode(str));
@@ -20,14 +20,14 @@ class GenerationDetailResponse{
     return GenerationDetailResponse(
       id: json['id'] ?? 0,
       name: json['name'] ?? '',
-      PokemonSpecies: speciesList,
+      pokemonSpecies: speciesList,
     );
   }
 
   Map<String, dynamic> toJson() => {
       'id': id,
       'name': name,
-      'pokemon_species': PokemonSpecies.map((x) => x.toJson()).toList()
+      'pokemon_species': pokemonSpecies.map((x) => x.toJson()).toList()
   };
 }
 

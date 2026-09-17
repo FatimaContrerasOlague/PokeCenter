@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:PokeCenter/models/pokemon_detail_response.dart';
-import 'package:PokeCenter/providers/poke_api_provider.dart';
-import 'package:PokeCenter/screens/pokemon_detail_screen.dart';
+import 'package:poke_center/models/pokemon_detail_response.dart';
+import 'package:poke_center/providers/poke_api_provider.dart';
+import 'package:poke_center/screens/pokemon_detail_screen.dart';
 
 final fixture = {
   'id': 25,

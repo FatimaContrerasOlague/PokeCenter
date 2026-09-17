@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:poke_center/providers/poke_api_provider.dart';
+import 'package:poke_center/screens/generation_list_screen.dart';
+import 'package:poke_center/screens/pokemon_center_screen.dart';
+import 'package:poke_center/widgets/menu_button.dart';
 import 'package:provider/provider.dart';
-import 'package:PokeCenter/providers/poke_api_provider.dart';
-import 'package:PokeCenter/screens/generation_list_screen.dart';
-import 'package:PokeCenter/screens/pokemon_center_screen.dart';
-import 'package:PokeCenter/widgets/menu_button.dart';
 
 class _FakeApi extends PokeApiProvider {
   @override

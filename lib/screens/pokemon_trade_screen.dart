@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:PokeCenter/widgets/menu_button.dart';
-import 'package:PokeCenter/widgets/responsive_panel.dart';
+import 'package:poke_center/widgets/menu_button.dart';
+import 'package:poke_center/widgets/responsive_panel.dart';
 
 const _tradeYellow = Color(0xFFE5D36D);
 
@@ -28,7 +28,11 @@ class PokemonTradeScreen extends StatelessWidget {
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
-              child: const MenuButton(),
+              child: MenuButton(
+                onPressed: () {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                },
+              ),
             ),
           ),
           Positioned(
@@ -36,9 +40,37 @@ class PokemonTradeScreen extends StatelessWidget {
             top: screenHeight * 0.15,
             width: screenWidth * 0.99,
             height: screenHeight * 0.65,
-            child: Image.asset(
-              'assets/images/poke_center/trade.png',
-              fit: BoxFit.contain,
+            child: Stack(
+              children: [
+                Image.asset(
+                  'assets/images/poke_center/trade.png',
+                  fit: BoxFit.contain,
+                ),
+                Positioned(
+                  left: screenWidth * 0.18,
+                  top: screenHeight * 0.07,
+                  width: screenWidth * 0.22,
+                  height: screenHeight * 0.24,
+                  child: Container(
+                    key: const Key('partner-slot'),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.transparent),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: screenWidth * 0.61,
+                  top: screenHeight * 0.07,
+                  width: screenWidth * 0.22,
+                  height: screenHeight * 0.24,
+                  child: Container(
+                    key: const Key('player-slot'),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.transparent),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Positioned(

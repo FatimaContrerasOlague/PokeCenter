@@ -2,9 +2,10 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:PokeCenter/widgets/menu_button.dart';
-import 'package:PokeCenter/widgets/pokeball_painter.dart';
-import 'package:PokeCenter/widgets/responsive_panel.dart';
+import 'package:poke_center/screens/pokemon_center_screen.dart';
+import 'package:poke_center/widgets/menu_button.dart';
+import 'package:poke_center/widgets/pokeball_painter.dart';
+import 'package:poke_center/widgets/responsive_panel.dart';
 
 class HealingMachineScreen extends StatefulWidget {
   const HealingMachineScreen({super.key});
@@ -14,6 +15,45 @@ class HealingMachineScreen extends StatefulWidget {
 }
 
 class _HealingMachineScreenState extends State<HealingMachineScreen> {
+  static const List<int> available = [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+  ];
+
   final ScrollController _scrollController = ScrollController();
   final List<int?> _slots = List.filled(6, null);
   final Set<int> _healed = {};
@@ -62,7 +102,7 @@ class _HealingMachineScreenState extends State<HealingMachineScreen> {
 
   Widget _ball(int id) => Semantics(
     label: 'Pokémon provisional $id',
-    child: const CustomPaint(painter: PokeballPainter()),
+    child: CustomPaint(painter: PokeballPainter()),
   );
 
   Widget _machine() => LayoutBuilder(
@@ -177,11 +217,7 @@ class _HealingMachineScreenState extends State<HealingMachineScreen> {
   );
 
   @override
-  Widget build(BuildContext context) {
-    final available = List.generate(
-      36,
-      (index) => index + 1,
-    ).where((id) => !_slots.contains(id) && !_healed.contains(id)).toList();
+ Widget build(BuildContext context) {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final screenHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
@@ -223,9 +259,14 @@ class _HealingMachineScreenState extends State<HealingMachineScreen> {
                     crossAxisSpacing: 12,
                     childAspectRatio: 0.85,
                   ),
-                  itemCount: available.length,
+                  itemCount: available
+                      .where((id) => !_slots.contains(id) && !_healed.contains(id))
+                      .length,
                   itemBuilder: (context, index) {
-                    final id = available[index];
+                    final id = available
+                        .where((item) => !_slots.contains(item) && !_healed.contains(item))
+                        .skip(index)
+                        .first;
                     final tile = Column(
                       children: [
                         Expanded(

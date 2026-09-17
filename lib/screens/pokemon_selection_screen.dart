@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:PokeCenter/widgets/pokeball_painter.dart';
-import 'package:PokeCenter/screens/pokemon_trade_screen.dart';
-import 'package:PokeCenter/widgets/menu_button.dart';
-import 'package:PokeCenter/widgets/responsive_panel.dart';
+import 'package:poke_center/screens/pokemon_trade_screen.dart';
+import 'package:poke_center/widgets/menu_button.dart';
+import 'package:poke_center/widgets/pokeball_painter.dart';
+import 'package:poke_center/widgets/responsive_panel.dart';
 
 class PokemonSelectionScreen extends StatefulWidget {
   const PokemonSelectionScreen({super.key});

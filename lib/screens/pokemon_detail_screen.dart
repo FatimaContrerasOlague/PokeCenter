@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:PokeCenter/models/pokemon_detail_response.dart';
-import 'package:PokeCenter/providers/poke_api_provider.dart';
+import 'package:poke_center/models/pokemon_detail_response.dart';
+import 'package:poke_center/providers/poke_api_provider.dart';
 
 class PokemonDetailScreen extends StatefulWidget {
   final int pokemonId;

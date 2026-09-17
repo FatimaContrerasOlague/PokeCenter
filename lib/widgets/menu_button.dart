@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:PokeCenter/screens/generation_list_screen.dart';
-import 'package:PokeCenter/screens/pokemon_center_screen.dart';
+import 'package:poke_center/screens/generation_list_screen.dart';
+import 'package:poke_center/screens/pokemon_center_screen.dart';
 
 enum _MenuDestination { home, pokemonCenter, exit }
 
 class MenuButton extends StatelessWidget {
-  const MenuButton({super.key});
+  final VoidCallback? onPressed;
+
+  const MenuButton({super.key, this.onPressed});
 
   Future<void> _openMenu(BuildContext context) async {
     final destination = await showDialog<_MenuDestination>(
@@ -22,9 +24,9 @@ class MenuButton extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(vertical: 20),
         children: [
           for (final option in const {
-            _MenuDestination.home: 'INICIO',
-            _MenuDestination.pokemonCenter: 'CENTRO POKEMON',
-            _MenuDestination.exit: 'SALIR',
+            _MenuDestination.home: 'Inicio',
+            _MenuDestination.pokemonCenter: 'Centro Pokemon',
+            _MenuDestination.exit: 'Salir',
           }.entries)
             SimpleDialogOption(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -65,7 +67,13 @@ class MenuButton extends StatelessWidget {
         .clamp(54.0, 66.0)
         .toDouble();
     return IconButton(
-      onPressed: () => _openMenu(context),
+      onPressed: () {
+        if (onPressed != null) {
+          onPressed!();
+          return;
+        }
+        _openMenu(context);
+      },
       tooltip: 'Abrir menu',
       padding: EdgeInsets.zero,
       iconSize: menuSize,

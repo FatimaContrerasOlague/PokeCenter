@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:PokeCenter/screens/healing_machine_screen.dart';
+import 'package:poke_center/screens/healing_machine_screen.dart';
 
 void main() {
   Future<void> mount(WidgetTester tester, Size size) async {
