@@ -9,7 +9,10 @@ void main() {
     tester,
   ) async {
     await tester.pumpWidget(const MaterialApp(home: PokemonCenterScreen()));
-    await tester.tap(find.text('Ir a la máquina de intercambio'));
+    await tester.pump(const Duration(seconds: 2));
+    await tester.tap(find.text('>>'));
+    await tester.pump(const Duration(seconds: 2));
+    await tester.tap(find.text('IR A LA MAQUINA DE INTERCAMBIO'));
     await tester.pumpAndSettle();
 
     expect(find.byType(PokemonTradeScreen), findsOneWidget);

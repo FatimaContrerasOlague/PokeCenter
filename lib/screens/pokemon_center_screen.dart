@@ -78,7 +78,7 @@ class _PokemonCenterScreenState extends State<PokemonCenterScreen> {
     if (opensChanseyScreen) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => ChanseyScreen()),
+        MaterialPageRoute(builder: (_) => const ChanseyScreen()),
       );
     }
   }
@@ -174,56 +174,106 @@ class _PokemonCenterScreenState extends State<PokemonCenterScreen> {
             ),
           ),
           Positioned(
-  left: 10,
-  right: 10,
-  bottom: screenHeight * 0.10,
-  child: ResponsivePanel(
-    widthFactor: 1,
-    padding: const EdgeInsets.all(10),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          'Hola, bienvenido al Centro Pokémon',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'NESFont'),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _panelColor,
-            foregroundColor: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HealingMachineScreen(),
+            left: 10,
+            right: 10,
+            bottom: screenHeight * 0.10,
+            child: ResponsivePanel(
+              widthFactor: 1,
+              height: 180,
+              padding: const EdgeInsets.all(8),
+              child: Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      bottom: _dialogueIndex == 0 ? 42 : 0,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: _dialogueIndex == 0
+                          ? MainAxisAlignment.center
+                          : MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          _currentMessage.substring(0, _visibleCharacters),
+                          key: const Key('center-dialogue'),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'NESFont',
+                            fontSize: 12,
+                          ),
+                        ),
+                        if (_dialogueIndex == 1) ...[
+                          const SizedBox(height: 10),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: _panelColor,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      const HealingMachineScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'IR A LA MAQUINA DE CURACION',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'NESFont',
+                                fontSize: 8,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: _panelColor,
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const PokemonTradeScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'IR A LA MAQUINA DE INTERCAMBIO',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'NESFont',
+                                fontSize: 8,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                  if (_dialogueIndex == 0)
+                    Positioned(
+                      left: 0,
+                      bottom: 0,
+                      child: ElevatedButton(
+                        onPressed: _showNextDialogue,
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(36, 30),
+                          padding: EdgeInsets.zero,
+                          backgroundColor: _panelColor,
+                          foregroundColor: Colors.white,
+                        ),
+                        child: const Text('>>'),
+                      ),
+                    ),
+                ],
               ),
-            );
-          },
-          child: const Text('Ir a la máquina de curación'),
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: _panelColor,
-            foregroundColor: Colors.white,
+            ),
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const PokemonTradeScreen(),
-              ),
-            );
-          },
-          child: const Text('Ir a la máquina de intercambio'),
-        ),
-      ],
-    ),
-  ),
-),
         ],
       ),
     );
