@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:poke_center/screens/pokemon_center_screen.dart';
 import 'package:poke_center/widgets/menu_button.dart';
 import 'package:poke_center/widgets/pokeball_painter.dart';
 import 'package:poke_center/widgets/responsive_panel.dart';
