@@ -28,11 +28,7 @@ class PokemonTradeScreen extends StatelessWidget {
           SafeArea(
             child: Align(
               alignment: Alignment.topLeft,
-              child: MenuButton(
-                onPressed: () {
-                  Navigator.of(context).popUntil((route) => route.isFirst);
-                },
-              ),
+              child: const MenuButton(),
             ),
           ),
           Positioned(

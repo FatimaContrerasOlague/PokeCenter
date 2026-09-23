@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:poke_center/screens/chansey_screen.dart';
 import 'package:poke_center/screens/healing_machine_screen.dart';
+import 'package:poke_center/screens/pokemon_selection_screen.dart';
 import 'package:poke_center/screens/pokemon_trade_screen.dart';
 import 'package:poke_center/widgets/menu_button.dart';
 import 'package:poke_center/widgets/responsive_panel.dart';
@@ -18,7 +19,7 @@ class PokemonCenterScreen extends StatefulWidget {
 
 class _PokemonCenterScreenState extends State<PokemonCenterScreen> {
   static const _welcomeMessage = 'HOLA, BIENVENIDO AL CENTRO POKEMON';
-  static const _destinationMessage = 'A DONDE QUIERES IR?';
+  static const _destinationMessage = '¿A DONDE QUIERES IR?';
 
   Timer? _typingTimer;
   int _dialogueIndex = 0;
@@ -238,7 +239,7 @@ class _PokemonCenterScreenState extends State<PokemonCenterScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const PokemonTradeScreen(),
+                                  builder: (_) => const PokemonSelectionScreen(),
                                 ),
                               );
                             },
