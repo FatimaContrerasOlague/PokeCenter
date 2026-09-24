@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:poke_center/screens/pokemon_center_screen.dart';
 import 'package:poke_center/screens/pokemon_trade_screen.dart';
 
 void main() {
-  testWidgets('Opens trade from the center and loads its background', (
+  testWidgets('Loads trade background and opens the shared menu', (
     tester,
   ) async {
-    await tester.pumpWidget(const MaterialApp(home: PokemonCenterScreen()));
-    await tester.pump(const Duration(seconds: 2));
-    await tester.tap(find.text('>>'));
-    await tester.pump(const Duration(seconds: 2));
-    await tester.tap(find.text('IR A LA MAQUINA DE INTERCAMBIO'));
+    await tester.pumpWidget(const MaterialApp(home: PokemonTradeScreen()));
     await tester.pumpAndSettle();
 
     expect(find.byType(PokemonTradeScreen), findsOneWidget);
@@ -31,6 +26,10 @@ void main() {
     expect(tester.takeException(), isNull);
     await tester.tap(find.byTooltip('Abrir menu'));
     await tester.pumpAndSettle();
-    expect(find.byType(PokemonCenterScreen), findsOneWidget);
+    expect(find.byKey(const Key('navigation-menu')), findsOneWidget);
+    expect(find.text('Inicio'), findsOneWidget);
+    expect(find.text('Centro Pokemon'), findsOneWidget);
+    expect(find.text('Salir'), findsOneWidget);
+    expect(find.byType(PokemonTradeScreen), findsOneWidget);
   });
 }
