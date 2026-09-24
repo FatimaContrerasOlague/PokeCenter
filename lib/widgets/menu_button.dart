@@ -7,10 +7,18 @@ enum _MenuDestination { home, pokemonCenter, exit }
 
 class MenuButton extends StatelessWidget {
   final VoidCallback? onPressed;
+  final VoidCallback? onMenuOpened;
+  final VoidCallback? onMenuClosed;
 
-  const MenuButton({super.key, this.onPressed});
+  const MenuButton({
+    super.key,
+    this.onPressed,
+    this.onMenuOpened,
+    this.onMenuClosed,
+  });
 
   Future<void> _openMenu(BuildContext context) async {
+    onMenuOpened?.call();
     final destination = await showDialog<_MenuDestination>(
       context: context,
       barrierDismissible: true,
@@ -44,6 +52,7 @@ class MenuButton extends StatelessWidget {
         ],
       ),
     );
+    onMenuClosed?.call();
     if (!context.mounted || destination == null) return;
     switch (destination) {
       case _MenuDestination.home:
