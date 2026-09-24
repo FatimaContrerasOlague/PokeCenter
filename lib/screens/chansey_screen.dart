@@ -27,9 +27,9 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
   static const _background = 'assets/images/poke_center/chF.jpeg';
   static const _egg = 'assets/images/poke_center/huevo.png';
   static const _bolt = 'assets/images/poke_center/bolt.png';
-    static const _chanseyElec =
+  static const _chanseyElec =
       'assets/images/poke_center/characters/canseyElec.png';
-    static const _chanseyQue =
+  static const _chanseyQue =
       'assets/images/poke_center/characters/canseyQue.png';
   static const _characters = [
     'assets/images/poke_center/characters/chanseyMJ3.png',
@@ -39,6 +39,8 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
 
   final _random = math.Random();
   Timer? _gameTimer;
+  Timer? _electricEffectTimer;
+  bool _showElectricEffect = false;
   final _fallingItems = <_FallingItem>[];
   int _elapsedTicks = 0;
   int _score = 0;
@@ -53,7 +55,7 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
 
   String get _displayCharacter {
     if (_caughtBolts >= 3) return _chanseyQue;
-    if (_caughtBolts > 0) return _chanseyElec;
+    if (_showElectricEffect) return _chanseyElec;
     return _activeCharacter;
   }
 
@@ -73,7 +75,7 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
   }
 
   void _setActiveLane(int lane) {
-    if (_isPaused || _gameOver) return;
+    if (_isPaused || _gameOver || _showElectricEffect) return;
     _updateSafely(() => _activeLane = lane);
   }
 
@@ -104,6 +106,13 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
           } else {
             _score = math.max(0, _score - 5);
             _caughtBolts++;
+            _electricEffectTimer?.cancel();
+            _showElectricEffect = _caughtBolts < 3;
+            if (_showElectricEffect) {
+              _electricEffectTimer = Timer(const Duration(milliseconds: 500), () {
+                _updateSafely(() => _showElectricEffect = false);
+              });
+            }
             if (_caughtBolts >= 3) {
               _gameOver = true;
               _fallingItems.clear();
@@ -126,6 +135,7 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
   }
 
   void _startGame() {
+    _electricEffectTimer?.cancel();
     _updateSafely(() {
       _gameStarted = true;
       _gameOver = false;
@@ -133,6 +143,7 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
       _elapsedTicks = 0;
       _score = 0;
       _caughtBolts = 0;
+      _showElectricEffect = false;
       _fallingItems.clear();
     });
   }
@@ -180,6 +191,7 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
   @override
   void dispose() {
     _gameTimer?.cancel();
+    _electricEffectTimer?.cancel();
     super.dispose();
   }
 
@@ -189,8 +201,9 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
     final screenHeight = MediaQuery.sizeOf(context).height;
     final eggSize = (screenWidth * 0.32).clamp(110.0, 155.0).toDouble();
     final boltSize = (screenWidth * 0.24).clamp(85.0, 120.0).toDouble();
-    final characterLeft = const [0.15, 0.25, 0.35][_activeLane];
-    final characterRight = const [0.35, 0.25, 0.15][_activeLane];
+    final characterLane = _gameOver ? 1 : _activeLane;
+    final characterLeft = const [0.15, 0.25, 0.35][characterLane];
+    final characterRight = const [0.35, 0.25, 0.15][characterLane];
     final panelSize = math.min(
       (screenHeight * 0.09).clamp(55.0, 85.0).toDouble(),
       screenWidth * 0.20,
@@ -226,7 +239,9 @@ class _ChanseyScreenState extends State<ChanseyScreen> {
             bottom: screenHeight * 0.18,
             child: _LaneCharacter(
               asset: _displayCharacter,
-              scale: _caughtBolts == 0 && _activeLane == 1 ? 1.08 : 1,
+              scale: _showElectricEffect
+                  ? 1.2
+                  : (!_gameOver && _activeLane == 1 ? 1.08 : 1),
             ),
           ),
           for (final item in _fallingItems)
