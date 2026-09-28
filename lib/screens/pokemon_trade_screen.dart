@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:poke_center/models/trade_request.dart';
 import 'package:poke_center/widgets/menu_button.dart';
+import 'package:poke_center/widgets/trainer_search_dialog.dart';
+import 'package:poke_center/widgets/pokeball_painter.dart';
 import 'package:poke_center/widgets/responsive_panel.dart';
 
-const _tradeYellow = Color(0xFFE5D36D);
-
-class PokemonTradeScreen extends StatelessWidget {
+class PokemonTradeScreen extends StatefulWidget {
   final List<int> selectedPokemonIds;
 
-  const PokemonTradeScreen({super.key, this.selectedPokemonIds = const []});
+  final TradeRequest? incomingRequest;
+
+  const PokemonTradeScreen({
+    super.key,
+    this.selectedPokemonIds = const [],
+    this.incomingRequest,
+  });
+
+  @override
+  State<PokemonTradeScreen> createState() => _PokemonTradeScreenState();
+}
+
+class _PokemonTradeScreenState extends State<PokemonTradeScreen> {
+  TradeTrainer? _selectedTrainer;
+
+  Future<void> _searchTrainer() async {
+    final trainer = await showDialog<TradeTrainer>(
+      context: context,
+      builder: (_) =>
+          TrainerSearchDialog(selectedTrainerId: _selectedTrainer?.id),
+    );
+    if (!mounted || trainer == null) return;
+    setState(() => _selectedTrainer = trainer);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +94,32 @@ class PokemonTradeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
+            left: screenWidth * 0.06,
+            right: screenWidth * 0.06,
+            bottom: screenHeight * 0.208 + 10,
+            child: FilledButton.icon(
+              key: const Key('search-trainers-button'),
+              onPressed: widget.incomingRequest == null ? _searchTrainer : null,
+              style: FilledButton.styleFrom(
+                backgroundColor: const Color(0xFFE5D36D),
+                disabledBackgroundColor: const Color(0xFFE5D36D),
+                disabledForegroundColor: const Color(0xFF30275C),
+                foregroundColor: const Color(0xFF30275C),
+                minimumSize: const Size(0, 48),
+              ),
+              icon: const Icon(Icons.person_search),
+              label: Text(
+                widget.incomingRequest != null
+                    ? '${widget.incomingRequest!.trainerName} ofrece a ${widget.incomingRequest!.pokemonName}'
+                    : _selectedTrainer == null
+                    ? 'Buscar entrenador'
+                    : 'Entrenador: ${_selectedTrainer!.name}',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          Positioned(
             left: screenWidth * 0.022,
             top: screenHeight * 0.792,
             width: screenWidth * 0.96,
@@ -108,24 +158,34 @@ class PokemonTradeScreen extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: screenHeight * 0.008),
-                            // Seis Poké Balls provisionales.
+                            // Poké Balls correspondientes a los ejemplares seleccionados.
                             Semantics(
-                              label: '6 Poké Balls usadas (provisional)',
+                              label:
+                                  '${widget.selectedPokemonIds.length} Poké Balls seleccionadas (provisional)',
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: List.generate(
-                                  6,
+                                  widget.selectedPokemonIds.length,
                                   (index) => Container(
+                                    key: ValueKey(
+                                      'trade-pokemon-${widget.selectedPokemonIds[index]}',
+                                    ),
                                     width: screenWidth * 0.085,
                                     height: screenWidth * 0.095,
                                     margin: EdgeInsets.only(
-                                      right: index < 5
+                                      right:
+                                          index <
+                                              widget.selectedPokemonIds.length -
+                                                  1
                                           ? screenWidth * 0.018
                                           : 0,
                                     ),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: _tradeYellow,
+                                    child: Semantics(
+                                      label:
+                                          'Pokémon provisional ${widget.selectedPokemonIds[index]}',
+                                      child: const CustomPaint(
+                                        painter: PokeballPainter(),
+                                      ),
                                     ),
                                   ),
                                 ),

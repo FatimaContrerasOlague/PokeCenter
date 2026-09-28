@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:poke_center/models/trade_request.dart';
+import 'package:poke_center/widgets/trade_requests_dialog.dart';
 import 'package:poke_center/screens/pokemon_trade_screen.dart';
 import 'package:poke_center/widgets/menu_button.dart';
 import 'package:poke_center/widgets/pokeball_painter.dart';
 import 'package:poke_center/widgets/responsive_panel.dart';
 
 class PokemonSelectionScreen extends StatefulWidget {
-  const PokemonSelectionScreen({super.key});
+  final List<TradeRequest> incomingRequests;
+
+  const PokemonSelectionScreen({
+    super.key,
+    this.incomingRequests = demoTradeRequests,
+  });
 
   @override
   State<PokemonSelectionScreen> createState() => _PokemonSelectionScreenState();
@@ -21,6 +28,29 @@ class _PokemonSelectionScreenState extends State<PokemonSelectionScreen> {
   void dispose() {
     scrollController.dispose();
     super.dispose();
+  }
+
+  Future<void> _openRequests() async {
+    final request = await showDialog<TradeRequest>(
+      context: context,
+      builder: (_) => TradeRequestsDialog(requests: widget.incomingRequests),
+    );
+    if (!mounted || request == null) return;
+    final pokemonId = await showDialog<int>(
+      context: context,
+      builder: (_) =>
+          TradeResponseDialog(request: request, pokemonIds: capturedPokemon),
+    );
+    if (!mounted || pokemonId == null) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PokemonTradeScreen(
+          selectedPokemonIds: [pokemonId],
+          incomingRequest: request,
+        ),
+      ),
+    );
   }
 
   void togglePokemon(int id) {
@@ -48,10 +78,23 @@ class _PokemonSelectionScreenState extends State<PokemonSelectionScreen> {
               Row(
                 children: [
                   const MenuButton(),
+                  IconButton(
+                    key: const Key('trade-requests-button'),
+                    tooltip: 'Solicitudes de intercambio',
+                    onPressed: _openRequests,
+                    icon: Badge(
+                      label: Text('${widget.incomingRequests.length}'),
+                      isLabelVisible: widget.incomingRequests.isNotEmpty,
+                      child: const Icon(
+                        Icons.mark_email_unread_outlined,
+                        color: Color(0xFF30275C),
+                      ),
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   const Expanded(
                     child: Text(
-                      'Elige 6 Pokémon',
+                      'Elige hasta 6 Pokémon',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

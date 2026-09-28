@@ -32,9 +32,9 @@ class MenuButton extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(vertical: 20),
         children: [
           for (final option in const {
-            _MenuDestination.home: 'Inicio',
-            _MenuDestination.pokemonCenter: 'Centro Pokemon',
-            _MenuDestination.exit: 'Salir',
+            _MenuDestination.home: 'INICIO',
+            _MenuDestination.pokemonCenter: 'CENTRO POKEMON',
+            _MenuDestination.exit: 'SALIR',
           }.entries)
             SimpleDialogOption(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
